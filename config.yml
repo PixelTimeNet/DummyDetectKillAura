@@ -1,0 +1,62 @@
+# 假人测试杀戮光环 DummyDetectKillAura 插件
+# 作者：Month_Light
+
+# 插件版本号
+version: 1.0.1
+
+# 插件的前缀
+Prefix: '&f[&6DDKA&f] '
+
+# 测试假人配置
+DetectDummy:
+
+  # 假人的数量 (不建议太多 4~6 即可)
+  Amount: 4
+
+  # 假人的显示名称
+  # 注意不要超过 16 个字符
+  DisplayName: 'DDKA'
+
+  # 假人的显示名称选项
+  # 方式:
+  #   -1: 不使用
+  #   0: 随机字符串 (不建议使用, 容易和真实玩家名冲突 (冲突几率较大))
+  #   1: 被检测玩家名 + 随机数字 (简单安全, 可能会被高级作弊端屏蔽)
+  #   2: 随机 UUID 截取中间 16 位 (建议使用此方式, 但是截取可能会重复)
+  #   3: 随机 UUID 并 MD5 加密 (强烈建议此方式, 几乎无重复 (缺点: 运算较大))
+  DisplayNameOption: -1
+
+  # 是否假人隐形
+  Invisibility: true
+
+  # 假人的停留时间 (Tick) (20 Tick = 1秒) (默认 1 秒)
+  StayTime: 20
+
+# 攻击自动检测配置
+# 当玩家拥有 moonlake.ddka.ignore 权限则无视检测
+AutoDetect:
+
+  # 是否开启此功能
+  Enable: true
+
+  # 当玩家攻击有多少几率触发检测
+  # 值 1~100, 如果值为 0 则不检测
+  AttackChance: 10
+
+  # 当破坏多少个假人时则判定疑似杀戮光环
+  # 此值必须小于或等于测试假人配置的数量
+  DestroyAmount: 3
+
+  # 当视为疑似杀戮光环时的处理
+  # 方式:
+  #   KICK: 踢出嫌疑人
+  #     例: 'KICK:疑似使用杀戮光环, 已被服务器踢出!'
+  #   BAN: 封禁嫌疑人
+  #     例: 'BAN:疑似使用杀戮光环, 已被服务器封禁!'
+  KillAuraHandler: 'KICK:疑似使用杀戮光环, 已被服务器踢出!'
+
+  # 当视为疑似杀戮光环时的自定义命令 (控制台执行)
+  # 例:
+  #   - 'say 玩家 %player% 疑似使用杀戮光环, 已被服务器强制踢出!'
+  #   - 'kill %player%'
+  KillAuraHandlerCmd: []
